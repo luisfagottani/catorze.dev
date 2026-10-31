@@ -42,17 +42,17 @@ export const stage = style({
   backgroundColor: vars.color.white,
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.lg,
-  display: "grid",
-  gap: vars.space.lg,
+  display: "flex",
+  flexDirection: "column",
   minHeight: "320px",
-  padding: vars.space.lg,
-  placeItems: "center",
+  overflow: "hidden",
 });
 
 export const stageHint = style({
   color: vars.color.muted,
   fontFamily: vars.font.mono,
   fontSize: "0.875rem",
-  margin: 0,
+  margin: "auto",
+  padding: vars.space.lg,
   textAlign: "center",
 });

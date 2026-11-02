@@ -17,8 +17,10 @@
     "@types/react-dom": "^19.3.0",
     "@vanilla-extract/css": "^1.21.3",
     "astro": "^7.3.8",
+    "motion": "^14.9.0",
     "react": "^19.3.0",
-    "react-dom": "^19.3.0"
+    "react-dom": "^19.3.0",
+    "react-use-measure": "^2.1.7"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.15",

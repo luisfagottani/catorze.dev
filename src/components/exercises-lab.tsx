@@ -1,18 +1,20 @@
-import { Content, List, Root, Trigger } from "@radix-ui/react-tabs";
-import TextReveal from "../exercises/animation-letters/animation-letters";
-import { AveNativeCoin } from "../exercises/ave-native-coin/ave-native-coin";
-import { CardHover } from "../exercises/card-hover/card-hover";
-import Coin3D from "../exercises/coin-3d/coid-3d";
-import DownloadButton from "../exercises/download-button/download-button";
-import HoldToDelete from "../exercises/hold-to-delete/hold-to-delete";
-import Orbit from "../exercises/orbit-animation/orbit";
-import { SimpleTransform } from "../exercises/simple-transform/simple-transform";
-import { Sonner } from "../exercises/sonner/sonner";
-import { SonnerExpanded } from "../exercises/sonner-expanded/sonner-expanded";
-import { list, panel, root, trigger } from "./exercises-lab.css";
-import { LabShell } from "./lab-shell";
+import FakeFamilyDrawer from "../exercises/animations/motion/fake-family-drawer/fake-family-drawer";
+import SendMeLogin from "../exercises/animations/motion/send-me-login/send-me-login";
+import YellowBoxLayout from "../exercises/animations/motion/yellow-box-layout/yellow-box-layout";
+import TextReveal from "../exercises/animations/only-css/animation-letters/animation-letters";
+import { AveNativeCoin } from "../exercises/animations/only-css/ave-native-coin/ave-native-coin";
+import { CardHover } from "../exercises/animations/only-css/card-hover/card-hover";
+import Coin3D from "../exercises/animations/only-css/coin-3d/coid-3d";
+import DownloadButton from "../exercises/animations/only-css/download-button/download-button";
+import HoldToDelete from "../exercises/animations/only-css/hold-to-delete/hold-to-delete";
+import Orbit from "../exercises/animations/only-css/orbit-animation/orbit";
+import { SimpleTransform } from "../exercises/animations/only-css/simple-transform/simple-transform";
+import { Sonner } from "../exercises/animations/only-css/sonner/sonner";
+import { SonnerExpanded } from "../exercises/animations/only-css/sonner-expanded/sonner-expanded";
+import { PageShell } from "./page-shell";
+import { Tabs } from "./tabs";
 
-const exercises = [
+const cssExercises = [
   { Component: Sonner, id: "sonner", label: "Sonner" },
   {
     Component: SimpleTransform,
@@ -49,26 +51,25 @@ const exercises = [
   },
 ];
 
+const framerExercises = [
+  { Component: SendMeLogin, id: "send-me-login", label: "Send me login" },
+  {
+    Component: FakeFamilyDrawer,
+    id: "fake-family-drawer",
+    label: "Fake family drawer",
+  },
+  {
+    Component: YellowBoxLayout,
+    id: "yellow-box-layout",
+    label: "Yellow box layout",
+  },
+];
+
 export function ExercisesLab() {
   return (
-    <LabShell>
-      <Root className={root} defaultValue={exercises[0].id}>
-        <List aria-label="Exercícios" className={list}>
-          {exercises.map((exercise) => (
-            <Trigger className={trigger} key={exercise.id} value={exercise.id}>
-              {exercise.label}
-            </Trigger>
-          ))}
-        </List>
-        {exercises.map((exercise) => {
-          const { Component } = exercise;
-          return (
-            <Content className={panel} key={exercise.id} value={exercise.id}>
-              <Component />
-            </Content>
-          );
-        })}
-      </Root>
-    </LabShell>
+    <PageShell title={"Animations Everywhere"}>
+      <Tabs exercises={cssExercises} />
+      <Tabs exercises={framerExercises} />
+    </PageShell>
   );
 }

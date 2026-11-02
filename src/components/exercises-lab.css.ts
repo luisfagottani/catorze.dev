@@ -86,3 +86,10 @@ export const panel = style({
     },
   },
 });
+
+export const title = style({
+  fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+  fontWeight: 600,
+  letterSpacing: "-0.02em",
+  margin: 0,
+});

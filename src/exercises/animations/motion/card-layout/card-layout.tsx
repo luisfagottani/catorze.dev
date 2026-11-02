@@ -114,7 +114,6 @@ export default function SharedLayout() {
 
       <ul className={list}>
         {GAMES.map((game) => (
-          // biome-ignore lint/a11y/noNoninteractiveElementInteractions: <becase is a exercise>
           <motion.li
             key={game.title}
             layoutId={`game-item-${game.title}`}

@@ -1,0 +1,79 @@
+---
+// Copy da about fica aqui — o i18n cobre só chrome da UI.
+import { SITE } from "../../consts";
+import { t } from "../../i18n";
+import BaseLayout from "../../layouts/base-layout.astro";
+---
+
+<BaseLayout
+  description={`Sobre quem tá por trás de ${SITE.title}.`}
+  title={t("about.title")}
+>
+  <section class="page-head section">
+    <p class="eyebrow">{t("about.eyebrow")}</p>
+    <h1>Luis Felipe R. Agottani</h1>
+    <p class="lead">
+      Esse jardim junta labs de animation, notas e rascunhos da web aberta — um
+      rastro público de como eu aprendo e construo.
+    </p>
+  </section>
+
+  <section class="section prose-grid">
+    <div>
+      <p class="eyebrow">Perfil</p>
+      <h2>UI, motion e aprender em público.</h2>
+    </div>
+    <div class="prose-stack">
+      <p>
+        Eu mexo com product UI e frontend. Motion faz parte de como o software
+        se sente — então deixo exercícios pequenos por aqui enquanto estudo.
+      </p>
+      <p>
+        catorze.fyi é a casa disso: demos pra abrir, notas quando algo gruda, e
+        espaço pro que ainda tá pela metade.
+      </p>
+    </div>
+  </section>
+
+  <section aria-label={t("about.ledgerLabel")} class="section">
+    <div class="about-ledger">
+      <article>
+        <span>01</span>
+        <h3>Foco agora</h3>
+        <p>
+          Craft de animation, product UI, e escrever notas enquanto o trampo
+          assenta.
+        </p>
+      </article>
+      <article>
+        <span>02</span>
+        <h3>Background</h3>
+        <p>
+          Frontend, interfaces de produto, e aprender shipando experimentos
+          pequenos.
+        </p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>Contato</h3>
+        <p>
+          Me acha no GitHub — ou manda um alô se quiser bater um papo sobre
+          motion e web.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section prose-grid about-closing">
+    <div>
+      <p class="eyebrow">Método</p>
+      <h2>Prática primeiro, polish depois.</h2>
+    </div>
+    <div class="prose-stack">
+      <p>
+        O jardim só presta se for honesto: nota curta, demo de verdade, e espaço
+        pra revisar. A estrutura segura a página; o conteúdo faz o resto.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import { formatDate, t } from "../../i18n";
+import BaseLayout from "../../layouts/base-layout.astro";
+import { withBase } from "../../lib/url";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("works");
+  return entries.map((workEntry) => ({
+    params: { slug: workEntry.id },
+    props: { entry: workEntry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout
+  description={entry.data.description}
+  image={withBase(`/og/works/${entry.id}.png`)}
+  ogType="article"
+  title={entry.data.title}
+>
+  <article data-pagefind-body>
+    <header class="page-head section article-head">
+      <p class="eyebrow">{t("work.eyebrow")}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="lead">{entry.data.description}</p>
+      <div class="entry-meta">
+        <time datetime={entry.data.publishDate.toISOString()}
+          >{formatDate(entry.data.publishDate)}</time
+        >
+        <span>{entry.data.tech.join(" / ")}</span>
+      </div>
+      <div class="action-row">
+        {entry.data.link && (
+          <a class="button" href={entry.data.link}>
+            {t("work.visit")}
+          </a>
+        )}
+        {entry.data.repo && (
+          <a class="text-link" href={entry.data.repo}>
+            {t("work.repository")}
+          </a>
+        )}
+      </div>
+      {entry.data.thumbnail && (
+        <Image
+          alt=""
+          class="article-image"
+          sizes="(min-width: 900px) 72rem, 100vw"
+          src={entry.data.thumbnail}
+          widths={[720, 1040, 1400]}
+        />
+      )}
+    </header>
+
+    <div class="section article-layout">
+      <aside class="article-toc">
+        <p class="eyebrow">{t("work.stackEyebrow")}</p>
+        <ul class="tech-list">
+          {entry.data.tech.map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

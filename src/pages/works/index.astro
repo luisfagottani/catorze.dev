@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import { SITE } from "../../consts";
+import { t } from "../../i18n";
+import BaseLayout from "../../layouts/base-layout.astro";
+import { withBase } from "../../lib/url";
+
+const works = (await getCollection("works")).sort((a, b) => {
+  const orderA = a.data.order ?? Number.MAX_SAFE_INTEGER;
+  const orderB = b.data.order ?? Number.MAX_SAFE_INTEGER;
+  if (orderA !== orderB) {
+    return orderA - orderB;
+  }
+  return b.data.publishDate.valueOf() - a.data.publishDate.valueOf();
+});
+---
+
+<BaseLayout
+  description={`Projetos e cases — ${SITE.title}.`}
+  title={t("works.title")}
+>
+  <section class="page-head section">
+    <p class="eyebrow">{t("works.eyebrow")}</p>
+    <h1>Projetos e cases.</h1>
+    <p class="lead">
+      Aqui entram description, stack, link, repo, thumbnail, ordem e data — o
+      schema já tipa tudo isso.
+    </p>
+  </section>
+
+  <section aria-label={t("works.listLabel")} class="section">
+    <div class="work-list">
+      {works.map((work) => (
+        <article class="work-card">
+          <p class="entry-meta">{work.data.tech.join(" / ")}</p>
+          <h2>
+            <a href={withBase(`/works/${work.id}/`)}>{work.data.title}</a>
+          </h2>
+          <p>{work.data.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

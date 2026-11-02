@@ -1,0 +1,63 @@
+---
+import { SITE } from "../consts";
+import { t } from "../i18n";
+import BaseLayout from "../layouts/base-layout.astro";
+import { withBase } from "../lib/url";
+
+const bundlePath = withBase("/pagefind/");
+---
+
+<BaseLayout
+  description={`Busca posts e works — ${SITE.title}.`}
+  title={t("search.title")}
+>
+  <link href={`${bundlePath}pagefind-ui.css`} rel="stylesheet" slot="head">
+  <section class="page-head section">
+    <p class="eyebrow">{t("search.eyebrow")}</p>
+    <h1>Acha posts e works.</h1>
+    <p class="lead">
+      Search estático com Pagefind — index no build, zero backend.
+    </p>
+  </section>
+
+  <section aria-label={t("search.sectionLabel")} class="section search-section">
+    <div data-bundle-path={bundlePath} id="search">
+      <p class="search-fallback" set:html={t("search.fallback")} />
+    </div>
+    <script data-astro-rerun is:inline>
+      // `data-astro-rerun` re-runs this after each soft navigation, because the
+      // swap replaces `#search` with an empty container. `bundlePath` comes from
+      // a data attribute — `define:vars` would strip `data-astro-rerun` from the
+      // rendered tag. The IIFE keeps re-runs from redeclaring top-level consts;
+      // the UI script itself is only loaded once and reused on later visits.
+      (() => {
+        const container = document.querySelector("#search");
+        if (!container) {
+          return;
+        }
+        const { bundlePath: path } = container.dataset;
+        const initSearch = () => {
+          container.querySelector(".search-fallback")?.remove();
+          // PagefindUI is provided by pagefind-ui.js at runtime.
+          const { PagefindUI } = window;
+          // biome-ignore lint/correctness/noUnusedInstantiation: mounts the search UI into #search
+          new PagefindUI({
+            autofocus: true,
+            bundlePath: path,
+            element: "#search",
+            showImages: false,
+            showSubResults: true,
+          });
+        };
+        if (window.PagefindUI) {
+          initSearch();
+        } else {
+          const script = document.createElement("script");
+          script.src = `${path}pagefind-ui.js`;
+          script.onload = initSearch;
+          document.head.append(script);
+        }
+      })();
+    </script>
+  </section>
+</BaseLayout>

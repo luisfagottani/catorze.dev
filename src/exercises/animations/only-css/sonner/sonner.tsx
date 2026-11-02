@@ -20,9 +20,7 @@ export const Sonner = () => {
             style={
               { "--index": array.length - 1 - index } as React.CSSProperties
             }
-          >
-            <h1>{toasts - 1 - index}</h1>
-          </div>
+          />
         ))}
       </div>
       <button className={buttonAddToast} onClick={addToast} type="button">

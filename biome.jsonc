@@ -8,5 +8,72 @@
   ],
   "files": {
     "includes": ["!.vscode"]
-  }
+  },
+  "overrides": [
+    {
+      "includes": ["src/components/comments.astro"],
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["**/*.astro"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noCommentText": "off",
+            "noEmptySource": "off",
+            "noUnknownAttribute": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "src/content.config.ts",
+        "src/pages/rss.xml.ts",
+        "src/pages/og/**/*.ts"
+      ],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnresolvedImports": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/styles/global.css"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noDescendingSpecificity": "off"
+          },
+          "suspicious": {
+            "useBaseline": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["public/favicon.svg"],
+      "linter": {
+        "rules": {
+          "a11y": {
+            "noSvgWithoutTitle": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["remark-reading-time.mjs"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUnresolvedImports": "off"
+          }
+        }
+      }
+    }
+  ]
 }

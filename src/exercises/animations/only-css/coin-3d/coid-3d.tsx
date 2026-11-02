@@ -9,7 +9,7 @@ import {
   root,
   wrapper,
 } from "./coid-3d.css";
-import CoinIcon from "./components/CoinIcon";
+import CoinIcon from "./components/coin-icon";
 
 function Coin3D() {
   return (

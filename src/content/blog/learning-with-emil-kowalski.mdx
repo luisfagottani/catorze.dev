@@ -1,0 +1,115 @@
+---
+title: Criando "Animation Taste" com Emil Kowalski
+description: Um notebook de resumo do animations.dev + demos.
+publishDate: 2026-11-02
+draft: false
+heroImage: ./learning-with-emil-kowalski.jpg
+tags:
+  - animation
+  - css
+  - motion
+---
+
+import { ExerciseDemo } from "../../components/blog/exercise-demo";
+
+Ainda vou escrever algo sobre e os principais ensinamentos, talvez um blueprint do [Animations on the Web](https://animations.dev) do Emil Kowalski.
+
+Mas por hora, segue só os exercicios feitos até o momento. 
+
+## Só CSS
+
+CSS puro primeiro. Sem lib até a ideia de motion estar clara na cascade.
+
+### Sonner
+
+Timing de toast stack — stagger, exit, e quanto cada toast cede quando um novo chega.
+
+<ExerciseDemo client:visible id="sonner" />
+
+### Simple transform
+
+O menor motion que ainda presta: mudança de property que parece intencional, não acidente.
+
+<ExerciseDemo client:visible id="simple-transform" />
+
+### Card hover
+
+Hover que levanta sem brigar com o layout — `transform-origin`, shadow e scale no mesmo beat.
+
+<ExerciseDemo client:visible id="card-hover" />
+
+### Download
+
+Botão que dono do próprio progress state, pra o click parecer completo — não abandonado no meio.
+
+<ExerciseDemo client:visible id="download" />
+
+### Sonner expanded
+
+Mesma família de toast, aberta — expand / collapse sem perder a memória espacial da stack.
+
+<ExerciseDemo client:visible id="sonner-expanded" />
+
+### Animation letters
+
+Reveal letra a letra. Timing tem que continuar legível: rápido demais vira ruído, lento demais vira cerimônia.
+
+<ExerciseDemo client:visible id="animation-letters" />
+
+### Orbit animation
+
+Orbit como decoração que ainda respeita o frame budget — composite-only onde importa.
+
+<ExerciseDemo client:visible id="orbit-animation" />
+
+### Coin 3D
+
+Flip que vende espessura. `perspective` e `transform-style` fazem o heavy lifting; o CSS mantém a coin honesta.
+
+<ExerciseDemo client:visible id="coin-3d" />
+
+### Hold to delete
+
+Press-and-hold como safety rail. Progress enche sob o dedo; soltar cancela sem drama.
+
+<ExerciseDemo client:visible id="hold-to-delete" />
+
+### Ave Native Coin
+
+Outro estudo de coin — mesmo brief, outro caminho em CSS — pra comparar o que “feeling nativo” realmente custa em rules.
+
+<ExerciseDemo client:visible id="ave-native-coin" />
+
+## Motion
+
+Quando CSS sozinho fica estranho (shared layout, gesture interruptível, presence orquestrada), o Motion for React assume.
+
+### Send me login
+
+Login multi-step em que enter e exit precisam continuar interruptíveis — nunca travar a pessoa num tween.
+
+<ExerciseDemo client:visible id="send-me-login" />
+
+### Fake family drawer
+
+Drawer que parece uma família de surfaces: enter, drag e dismiss contam a mesma história espacial.
+
+<ExerciseDemo client:visible id="fake-family-drawer" />
+
+### Yellow box layout
+
+Shared layout numa yellow box — ver a geometry morphar em vez de crossfade entre duas trees sem relação.
+
+<ExerciseDemo client:visible id="yellow-box-layout" />
+
+### Yellow box increase
+
+Layout animation quando a box cresce. Mudança de size tem que parecer física, não jump cut.
+
+<ExerciseDemo client:visible id="yellow-box-increase" />
+
+### Card layout
+
+Card expandido com shared-element continuity. Open e close precisam pousar na mesma identidade visual.
+
+<ExerciseDemo client:visible id="card-layout" />

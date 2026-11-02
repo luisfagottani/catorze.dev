@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/a11y/useSemanticElements: layout box needs a div, not a button */
 import { motion } from "motion/react";
 import { useState } from "react";
 import { element, wrapper } from "./yellow-box-layout.css";
@@ -23,7 +24,6 @@ export default function Example() {
 
   return (
     <div className={wrapper}>
-      {/** biome-ignore lint/a11y/useSemanticElements: we need to use a div for the button */}
       <motion.div
         className={element}
         layout

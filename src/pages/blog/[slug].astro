@@ -1,0 +1,186 @@
+---
+import { Image } from "astro:assets";
+import { getCollection, render } from "astro:content";
+import Comments from "../../components/comments.astro";
+import StructuredData from "../../components/structured-data.astro";
+import { SITE } from "../../consts";
+import { formatDate, readingTime, t } from "../../i18n";
+import BaseLayout from "../../layouts/base-layout.astro";
+import { withBase } from "../../lib/url";
+
+export async function getStaticPaths() {
+  // Newest-first, same ordering as the blog index.
+  const entries = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+  );
+  return entries.map((blogEntry, entryIndex) => {
+    // Up to 3 posts ranked by shared tags; ties resolved by newest publish date.
+    const related = entries
+      .filter((other) => other.id !== blogEntry.id)
+      .map((other) => ({
+        post: other,
+        shared: other.data.tags.filter((tag) =>
+          blogEntry.data.tags.includes(tag)
+        ).length,
+      }))
+      .filter(({ shared }) => shared > 0)
+      .sort(
+        (a, b) =>
+          b.shared - a.shared ||
+          b.post.data.publishDate.valueOf() - a.post.data.publishDate.valueOf()
+      )
+      .slice(0, 3)
+      .map(({ post }) => post);
+
+    return {
+      params: { slug: blogEntry.id },
+      props: {
+        entry: blogEntry,
+        newer: entries[entryIndex - 1] ?? null,
+        older: entries[entryIndex + 1] ?? null,
+        related,
+      },
+    };
+  });
+}
+
+const { entry, newer, older, related } = Astro.props;
+const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+
+// JSON-LD needs absolute URLs — resolve against `site` (astro.config.mjs).
+const site = Astro.site ?? new URL(Astro.url.origin);
+const absolute = (path: string) => new URL(withBase(path), site).href;
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    datePublished: entry.data.publishDate.toISOString(),
+    description: entry.data.description,
+    headline: entry.data.title,
+    image: absolute(`/og/blog/${entry.id}.png`),
+    url: absolute(`/blog/${entry.id}/`),
+    ...(SITE.author
+      ? { author: { "@type": "Person", name: SITE.author } }
+      : {}),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        item: absolute("/"),
+        name: t("post.breadcrumbHome"),
+        position: 1,
+      },
+      {
+        "@type": "ListItem",
+        item: absolute("/blog/"),
+        name: t("post.breadcrumbBlog"),
+        position: 2,
+      },
+      { "@type": "ListItem", name: entry.data.title, position: 3 },
+    ],
+  },
+];
+---
+
+<BaseLayout
+  description={entry.data.description}
+  image={withBase(`/og/blog/${entry.id}.png`)}
+  ogType="article"
+  title={entry.data.title}
+>
+  <StructuredData schema={schema} slot="head" />
+  <article data-pagefind-body>
+    <header class="page-head section article-head">
+      <p class="eyebrow">{t("post.eyebrow")}</p>
+      <h1>{entry.data.title}</h1>
+      <p class="lead">{entry.data.description}</p>
+      <div class="entry-meta">
+        <time datetime={entry.data.publishDate.toISOString()}
+          >{formatDate(entry.data.publishDate)}</time
+        >
+        <span>{readingTime(remarkPluginFrontmatter.minutesRead)}</span>
+        <span>{entry.data.tags.join(" / ")}</span>
+      </div>
+      {entry.data.heroImage && (
+        <Image
+          alt=""
+          class="article-image"
+          sizes="(min-width: 900px) 72rem, 100vw"
+          src={entry.data.heroImage}
+          widths={[720, 1040, 1400]}
+        />
+      )}
+    </header>
+
+    <div class="section article-layout">
+      <aside aria-label={t("post.tocLabel")} class="article-toc">
+        <p class="eyebrow">{t("post.contentsEyebrow")}</p>
+        <nav>
+          {headings
+            .filter((heading) => heading.depth === 2 || heading.depth === 3)
+            .map((heading) => (
+              <a
+                class={heading.depth === 3 ? "toc-h3" : undefined}
+                href={`#${heading.slug}`}
+              >
+                {heading.text}
+              </a>
+            ))}
+        </nav>
+      </aside>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  {(older || newer) && (
+    <nav aria-label={t("post.adjacentLabel")} class="section post-nav-section">
+      <div class="post-nav">
+        {older ? (
+          <a href={withBase(`/blog/${older.id}/`)} rel="prev">
+            <span class="post-nav-label">{t("post.previous")}</span>
+            <span class="post-nav-title">{older.data.title}</span>
+          </a>
+        ) : (
+          <span aria-hidden="true" />
+        )}
+        {newer ? (
+          <a
+            class="post-nav-next"
+            href={withBase(`/blog/${newer.id}/`)}
+            rel="next"
+          >
+            <span class="post-nav-label">{t("post.next")}</span>
+            <span class="post-nav-title">{newer.data.title}</span>
+          </a>
+        ) : (
+          <span aria-hidden="true" />
+        )}
+      </div>
+    </nav>
+  )}
+
+  {related.length > 0 && (
+    <aside aria-labelledby="related-heading" class="section post-nav-section">
+      <p class="eyebrow" id="related-heading">
+        {t("post.relatedEyebrow")}
+      </p>
+      <ul class="related-list">
+        {related.map((post) => (
+          <li>
+            <a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a>
+            <time datetime={post.data.publishDate.toISOString()}>
+              {formatDate(post.data.publishDate)}
+            </time>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
+
+  <Comments />
+</BaseLayout>

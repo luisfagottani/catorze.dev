@@ -3,3 +3,5 @@ allowBuilds:
 permissions:
   ultracite:
     skills: true
+skills:
+  dirs: []

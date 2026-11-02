@@ -1,0 +1,15 @@
+---
+interface Props {
+  /** Tooltip / acessível. */
+  label?: string;
+}
+
+const { label = "Rascunho de IA — ainda vou reescrever" } = Astro.props;
+---
+
+<aside aria-label={label} class="ai-draft" data-ai title={label}>
+  <span aria-hidden="true" class="ai-draft-badge">IA</span>
+  <div class="ai-draft-body">
+    <slot />
+  </div>
+</aside>

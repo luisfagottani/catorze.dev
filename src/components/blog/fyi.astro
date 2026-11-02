@@ -1,0 +1,14 @@
+---
+interface Props {
+  label?: string;
+}
+
+const { label = "FYI" } = Astro.props;
+---
+
+<aside aria-label={label} class="fyi">
+  <span aria-hidden="true" class="fyi-stamp">FYI.</span>
+  <div class="fyi-body">
+    <slot />
+  </div>
+</aside>

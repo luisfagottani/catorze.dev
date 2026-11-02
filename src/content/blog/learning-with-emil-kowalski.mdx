@@ -10,106 +10,160 @@ tags:
   - motion
 ---
 
+import AiDraft from "../../components/blog/ai-draft.astro";
+import Fyi from "../../components/blog/fyi.astro";
 import { ExerciseDemo } from "../../components/blog/exercise-demo";
+
+<Fyi>
+  Bloco com badge **IA** (`<AiDraft>`) é draft feito com IA — eu ainda vou
+  reescrever. A ideia aqui é ser honesto com oq foi feito com robo e oq não foi.
+</Fyi>
 
 Ainda vou escrever algo sobre e os principais ensinamentos, talvez um blueprint do [Animations on the Web](https://animations.dev) do Emil Kowalski.
 
-Mas por hora, segue só os exercicios feitos até o momento. 
+Mas por hora, segue só os exercicios feitos até o momento.
+
+
 
 ## Só CSS
 
-CSS puro primeiro. Sem lib até a ideia de motion estar clara na cascade.
+Aqui foi só na base do CSS, transitions, animations, preserveStyle, etc;  
 
 ### Sonner
 
-Timing de toast stack — stagger, exit, e quanto cada toast cede quando um novo chega.
+<AiDraft>
+  Timing de toast stack — stagger, exit, e quanto cada toast cede quando um novo
+  chega.
+</AiDraft>
 
 <ExerciseDemo client:visible id="sonner" />
 
 ### Simple transform
 
-O menor motion que ainda presta: mudança de property que parece intencional, não acidente.
+<AiDraft>
+  O menor motion que ainda presta: mudança de property que parece intencional,
+  não acidente.
+</AiDraft>
 
 <ExerciseDemo client:visible id="simple-transform" />
 
 ### Card hover
 
-Hover que levanta sem brigar com o layout — `transform-origin`, shadow e scale no mesmo beat.
+<AiDraft>
+  Hover que levanta sem brigar com o layout — `transform-origin`, shadow e scale
+  no mesmo beat.
+</AiDraft>
 
 <ExerciseDemo client:visible id="card-hover" />
 
 ### Download
 
-Botão que dono do próprio progress state, pra o click parecer completo — não abandonado no meio.
+<AiDraft>
+  Botão que dono do próprio progress state, pra o click parecer completo — não
+  abandonado no meio.
+</AiDraft>
 
 <ExerciseDemo client:visible id="download" />
 
 ### Sonner expanded
 
-Mesma família de toast, aberta — expand / collapse sem perder a memória espacial da stack.
+<AiDraft>
+  Mesma família de toast, aberta — expand / collapse sem perder a memória
+  espacial da stack.
+</AiDraft>
 
 <ExerciseDemo client:visible id="sonner-expanded" />
 
 ### Animation letters
 
-Reveal letra a letra. Timing tem que continuar legível: rápido demais vira ruído, lento demais vira cerimônia.
+<AiDraft>
+  Reveal letra a letra. Timing tem que continuar legível: rápido demais vira
+  ruído, lento demais vira cerimônia.
+</AiDraft>
 
 <ExerciseDemo client:visible id="animation-letters" />
 
 ### Orbit animation
 
-Orbit como decoração que ainda respeita o frame budget — composite-only onde importa.
+<AiDraft>
+  Orbit como decoração que ainda respeita o frame budget — composite-only onde
+  importa.
+</AiDraft>
 
 <ExerciseDemo client:visible id="orbit-animation" />
 
 ### Coin 3D
 
-Flip que vende espessura. `perspective` e `transform-style` fazem o heavy lifting; o CSS mantém a coin honesta.
+<AiDraft>
+  Flip que vende espessura. `perspective` e `transform-style` fazem o heavy
+  lifting; o CSS mantém a coin honesta.
+</AiDraft>
 
 <ExerciseDemo client:visible id="coin-3d" />
 
 ### Hold to delete
 
-Press-and-hold como safety rail. Progress enche sob o dedo; soltar cancela sem drama.
+<AiDraft>
+  Press-and-hold como safety rail. Progress enche sob o dedo; soltar cancela sem
+  drama.
+</AiDraft>
 
 <ExerciseDemo client:visible id="hold-to-delete" />
 
 ### Ave Native Coin
 
-Outro estudo de coin — mesmo brief, outro caminho em CSS — pra comparar o que “feeling nativo” realmente custa em rules.
+<AiDraft>
+  Outro estudo de coin — mesmo brief, outro caminho em CSS — pra comparar o que
+  “feeling nativo” realmente custa em rules.
+</AiDraft>
 
 <ExerciseDemo client:visible id="ave-native-coin" />
 
 ## Motion
 
-Quando CSS sozinho fica estranho (shared layout, gesture interruptível, presence orquestrada), o Motion for React assume.
+Quando precisamos de algo mais complexo que o CSS não consegue suprir (ou o custo benefício não compensa: spring animations, layout modes, etc)
 
 ### Send me login
 
-Login multi-step em que enter e exit precisam continuar interruptíveis — nunca travar a pessoa num tween.
+<AiDraft>
+  Login multi-step em que enter e exit precisam continuar interruptíveis — nunca
+  travar a pessoa num tween.
+</AiDraft>
 
 <ExerciseDemo client:visible id="send-me-login" />
 
 ### Fake family drawer
 
-Drawer que parece uma família de surfaces: enter, drag e dismiss contam a mesma história espacial.
+<AiDraft>
+  Drawer que parece uma família de surfaces: enter, drag e dismiss contam a
+  mesma história espacial.
+</AiDraft>
 
 <ExerciseDemo client:visible id="fake-family-drawer" />
 
 ### Yellow box layout
 
-Shared layout numa yellow box — ver a geometry morphar em vez de crossfade entre duas trees sem relação.
+<AiDraft>
+  Shared layout numa yellow box — ver a geometry morphar em vez de crossfade
+  entre duas trees sem relação.
+</AiDraft>
 
 <ExerciseDemo client:visible id="yellow-box-layout" />
 
 ### Yellow box increase
 
-Layout animation quando a box cresce. Mudança de size tem que parecer física, não jump cut.
+<AiDraft>
+  Layout animation quando a box cresce. Mudança de size tem que parecer física,
+  não jump cut.
+</AiDraft>
 
 <ExerciseDemo client:visible id="yellow-box-increase" />
 
 ### Card layout
 
-Card expandido com shared-element continuity. Open e close precisam pousar na mesma identidade visual.
+<AiDraft>
+  Card expandido com shared-element continuity. Open e close precisam pousar na
+  mesma identidade visual.
+</AiDraft>
 
 <ExerciseDemo client:visible id="card-layout" />

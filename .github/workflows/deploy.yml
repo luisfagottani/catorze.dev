@@ -18,8 +18,12 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v7
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 12
       - name: Install Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: "./.nvmrc"
           cache: pnpm
@@ -27,12 +31,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v6
         with:
-          path: "./src"
-        # node-version: 24 # The specific version of Node that should be used to build your site. Defaults to 24. (optional)
-        # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-        # build-cmd: pnpm run build # The command to run to build your site. Runs the package build script/task by default. (optional)
-        # env:
-        # PUBLIC_POKEAPI: 'https://pokeapi.co/api/v2' # Use single quotation marks for the variable value. (optional)
+          package-manager: pnpm@12
 
   deploy:
     needs: build

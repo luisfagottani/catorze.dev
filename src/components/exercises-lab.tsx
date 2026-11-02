@@ -1,7 +1,10 @@
 import { Content, List, Root, Trigger } from "@radix-ui/react-tabs";
 import TextReveal from "../exercises/animation-letters/animation-letters";
+import { AveNativeCoin } from "../exercises/ave-native-coin/ave-native-coin";
 import { CardHover } from "../exercises/card-hover/card-hover";
+import Coin3D from "../exercises/coin-3d/coid-3d";
 import DownloadButton from "../exercises/download-button/download-button";
+import HoldToDelete from "../exercises/hold-to-delete/hold-to-delete";
 import Orbit from "../exercises/orbit-animation/orbit";
 import { SimpleTransform } from "../exercises/simple-transform/simple-transform";
 import { Sonner } from "../exercises/sonner/sonner";
@@ -28,6 +31,21 @@ const exercises = [
     Component: Orbit,
     id: "orbit-animation",
     label: "Orbit animation",
+  },
+  {
+    Component: Coin3D,
+    id: "coin-3d",
+    label: "Coin 3D",
+  },
+  {
+    Component: HoldToDelete,
+    id: "hold-to-delete",
+    label: "Hold to delete",
+  },
+  {
+    Component: AveNativeCoin,
+    id: "ave-native-coin",
+    label: "Ave Native Coin",
   },
 ];
 

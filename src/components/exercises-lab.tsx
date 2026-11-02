@@ -1,5 +1,7 @@
+import CardLayout from "../exercises/animations/motion/card-layout/card-layout";
 import FakeFamilyDrawer from "../exercises/animations/motion/fake-family-drawer/fake-family-drawer";
 import SendMeLogin from "../exercises/animations/motion/send-me-login/send-me-login";
+import YellowBoxIncrease from "../exercises/animations/motion/yellow-box-increase/yellow-box-increase";
 import YellowBoxLayout from "../exercises/animations/motion/yellow-box-layout/yellow-box-layout";
 import TextReveal from "../exercises/animations/only-css/animation-letters/animation-letters";
 import { AveNativeCoin } from "../exercises/animations/only-css/ave-native-coin/ave-native-coin";
@@ -62,6 +64,16 @@ const framerExercises = [
     Component: YellowBoxLayout,
     id: "yellow-box-layout",
     label: "Yellow box layout",
+  },
+  {
+    Component: YellowBoxIncrease,
+    id: "yellow-box-increase",
+    label: "Yellow box increase",
+  },
+  {
+    Component: CardLayout,
+    id: "card-layout",
+    label: "Card layout",
   },
 ];
 

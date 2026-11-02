@@ -20,7 +20,7 @@ export function LabShell({
   return (
     <main className={main}>
       <header className={header}>
-        <p className={eyebrow}>animations.dev</p>
+        <p className={eyebrow}>catorze.dev</p>
         <h1 className={heading}>{title}</h1>
         <p className={subtitle}>
           Uma aba por exercício. O código de cada um fica em{" "}

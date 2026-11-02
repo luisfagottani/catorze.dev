@@ -1,4 +1,4 @@
 # Catorze.dev
 
-TIL, blog's, examples or just an hub to explore new thing's. IDK. 👀
+TIL, blog's, examples or just a hub to explore new thing's. IDK. 👀
 

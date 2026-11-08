@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import CardLayout from "./animations/motion/card-layout/card-layout";
 import FakeFamilyDrawer from "./animations/motion/fake-family-drawer/fake-family-drawer";
+import FeedbackPopover from "./animations/motion/feedback-popover/feedback-popover";
 import SendMeLogin from "./animations/motion/send-me-login/send-me-login";
 import YellowBoxIncrease from "./animations/motion/yellow-box-increase/yellow-box-increase";
 import YellowBoxLayout from "./animations/motion/yellow-box-layout/yellow-box-layout";
@@ -100,6 +101,12 @@ export const exercises: ExerciseEntry[] = [
     group: "motion",
     id: "card-layout",
     label: "Card layout",
+  },
+  {
+    Component: FeedbackPopover,
+    group: "motion",
+    id: "popover",
+    label: "Feedback popover",
   },
 ];
 

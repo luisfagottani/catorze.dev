@@ -9,8 +9,6 @@ export default function Example() {
   };
   const [ref, bounds] = useMeasure({ offsetSize: true });
 
-  console.log(bounds);
-
   return (
     <div className={wrapper}>
       <button className={button} onClick={handleToggle} type="button">
